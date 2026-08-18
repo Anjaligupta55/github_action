@@ -11,6 +11,6 @@ jobs:
       - name: check the runs
         run: |
               echo "PR on  ${{github.base_ref}} branch is now ready to be merged \n PR number ${{github.event.pull_request.number}}"
-              echo"Gatekeeper check complete"
+              echo "Gatekeeper check complete"
 
         
