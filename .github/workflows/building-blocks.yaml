@@ -1,16 +1,49 @@
-name: Building Block 1
+name: System Report
+
 on: push
 
 jobs:
-  echo-hello:
+  system-info:
     runs-on: ubuntu-latest
+
     steps:
-      - name: say hello
-        run: echo 'Hello World'
-  echo-goodbye:
+      - name: OS and kernel
+        run: uname -a
+
+      - name: Free disk space
+        run: df -h
+
+      - name: Date and time
+        run: date
+
+      - name: Install tree
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y tree
+
+      - name: Show home directory
+        run: tree -L 2 ~
+
+  tool-check:
     runs-on: ubuntu-latest
+
     steps:
-      - name: say goodbye
-        run: echo 'Goodbye World'
-      - name: say goodbye again
-        run: echo "goodbye, world!!!"
+      - name: Install jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+
+      - name: Create JSON file
+        run: echo '{"name":"Anjali","course":"BTech","year":"2"}' > report.json
+
+      - name: Read JSON value
+        run: jq '.name' report.json
+
+      - name: Check tool versions
+        run: |
+          python3 --version
+          git --version
+          jq --version
+
+      - name: Complete report
+        run: echo "Report complete"
