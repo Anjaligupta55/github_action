@@ -1,27 +1,27 @@
 name: checkout proof
 
 on:
-    push:
-    workflow-dispatched:
+  push:
+  workflow_dispatch:
 
-job:
-    proof:
-        runs-on:ubuntu-lastest
+jobs:
+  prove:
+    runs-on: ubuntu-latest
+
     steps:
       - name: current folder name
         run: |
-            pwd
-             ls -la
-      - name: checkout repository
-        uses: actions/checkout@v7
+          pwd
+          ls -la
 
-      - name:List contents after checkout
-        run: ls - la
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: List contents after checkout
+        run: ls -la
 
       - name: count present files
-        run: ls -1 | wc -1
-         
-        -name: complete proof
-        run: echo "proof captured"
-    
+        run: ls -1 | wc -l
 
+      - name: complete proof
+        run: echo "proof captured"
